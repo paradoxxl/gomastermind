@@ -65,7 +65,7 @@ type NewGameMsg struct {
 type GuessMsg struct {
 	Guess Code
 }
-type Code []	int[]int
+type Code	[]int
 type Answer []int
 type MessageHandler interface {
 	OnCommand(commandType byte, message interface{})
