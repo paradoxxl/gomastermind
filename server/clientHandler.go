@@ -90,7 +90,7 @@ func (state *ClientHandler) newGame(nbrColors,codeLen,maxTries int) {
 	for i := 0; i < codeLen; i++ {
 		code[i] = rand.Intn(int(nbrColors))
 	}
-	state.game = &msg.Game{&code, &msg.NewGameMsg{NbrColors:nbrColors, CodeLength:codeLen, MaxTries:maxTries}, maxTries}
+	state.game = &msg.Game{&code, &msg.NewGameMsg{NbrColors:nbrColors, CodeLength:codeLen, MaxTries:maxTries}, 0}
 	data := msg.EncodeAcceptMsg(&msg.AcceptMsg{Accept:true, Attributes:state.game.Attributes})
 
 	err := state.Send(&data)
@@ -136,8 +136,8 @@ func (state *ClientHandler) guess(guess *msg.Code) *string {
 		state.game = nil
 		return &data
 	} else {
-		if state.game.Tries + 1 == state.game.Attributes.MaxTries {
-			state.game.Tries+=1
+		state.game.Tries+=1
+		if state.game.Tries  >= state.game.Attributes.MaxTries {
 			data = msg.EncodeGameEndMsg(&msg.GameEndMsg{Won:false, Code:state.game.Code,Tries:state.game.Tries})
 			state.game = nil
 			return &data
@@ -161,7 +161,6 @@ func (state *ClientHandler) guess(guess *msg.Code) *string {
 	}
 
 	//fmt.Printf("Msg: %v, Guessstate: %v, Answer: %v,", data, *guess, response)
-	state.game.Tries++
 	return &data
 }
 
