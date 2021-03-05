@@ -14,6 +14,6 @@ jobs:
         token: ${{ secrets.TELEGRAM_TOKEN }}
         format: html
         message: |
-          <em> <a href="https://github.com/paradoxxl/gomastermind">Updated version available</a> <em> User ${{ github.event.push.pusher.name }}</em> ⚡️
+          ⚡️ <em> <a href="https://github.com/paradoxxl/gomastermind">Repo updated by</a> ${{ github.event.push.pusher.name }}</em> ⚡️
           ${{ github.actor }} commit message ${{ github.event.head_commit.message }}
           Go to commit <a href="https://github.com/paradoxxl/gomastermind/commit/${{ github.sha }}">here</a>
