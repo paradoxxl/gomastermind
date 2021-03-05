@@ -15,5 +15,8 @@ jobs:
         format: html
         message: |
           ⚡️ <em> <a href="https://github.com/paradoxxl/gomastermind">Repo updated by</a> ${{ github.actor }}</em> ⚡️ 
-          commit message is ${{ github.event.head_commit.message }}
+          commit message: 
+          ${{ github.event.head_commit.message }}
+          
+          Go to repo directly <a href="https://github.com/paradoxxl/gomastermind">here</a>
           Go to commit directly <a href="https://github.com/paradoxxl/gomastermind/commit/${{ github.sha }}">here</a>
